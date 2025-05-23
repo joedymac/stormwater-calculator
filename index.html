@@ -1,0 +1,22 @@
+<div style="max-width: 400px; padding: 1em; border: 1px solid #ccc; border-radius: 8px; font-family: sans-serif;">
+  <h3>Stormwater Fee Calculator</h3>
+  <p>Enter your total impervious surface area (in square feet):</p>
+  <input id="surfaceInput" type="number" placeholder="e.g. 47303" style="width: 100%; padding: 8px; margin-bottom: 10px;" />
+  <button onclick="calculateFee()" style="width: 100%; padding: 10px; background-color: #007ac2; color: white; border: none; border-radius: 4px;">Calculate Fee</button>
+  <p id="result" style="margin-top: 1em; font-weight: bold;"></p>
+</div>
+
+<script>
+  function calculateFee() {
+    const sqft = parseFloat(document.getElementById("surfaceInput").value);
+    const sfeu = 2260;
+    const rate = 7.85;
+    if (isNaN(sqft) || sqft <= 0) {
+      document.getElementById("result").innerText = "Please enter a valid number.";
+      return;
+    }
+    const fee = (sqft / sfeu) * rate;
+    const formatted = fee.toLocaleString("en-US", { style: "currency", currency: "USD" });
+    document.getElementById("result").innerText = `Estimated Monthly Fee: ${formatted}`;
+  }
+</script>
